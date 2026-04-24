@@ -1,0 +1,16 @@
+{
+  "name": "WeavePay",
+  "track": "DeFi",
+  "vm": "EVM",
+  "network": "Initia testnet",
+  "rollup_chain_id": "weavepay-1",
+  "contract_address": "TBD",
+  "demo_video_url": "TBD",
+  "repository_url": "TBD",
+  "native_features": [
+    "InterwovenKit wallet connection",
+    "Interwoven bridge entry point",
+    "MiniEVM transaction submission"
+  ],
+  "summary": "WeavePay is a checkout link and merchant settlement rail for Initia appchains."
+}
