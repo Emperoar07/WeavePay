@@ -15,57 +15,50 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
 
   return (
     <main className="page-shell">
-      <div className="content-shell pt-12">
-        <div className="page-label">{`Checkout · /checkout/${invoice.id}`}</div>
-      </div>
+      <div className="wrap">
+        <AppNav />
 
-      <AppNav />
-
-      <section className="content-shell mt-8 pb-16">
-        <div className="grid grid-cols-[1fr_1.3fr] gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 14, marginTop: 28 }}>
           {/* Pay card */}
-          <div className="section-card p-9">
+          <div style={{ border: "1px solid var(--line)", borderRadius: 20, background: "var(--paper-soft)", padding: 36 }}>
             <div className="kicker"><span className="kicker-dot" />Buyer checkout</div>
-            <h1 className="serif-display mt-7 text-[42px] leading-[1.05]">
+            <h1 className="serif" style={{ fontSize: 42, letterSpacing: "-0.02em", lineHeight: 1.05, marginTop: 24, maxWidth: "9ch" }}>
               Orbit Shop<br />· Limited drop
             </h1>
-            <p className="mt-6 max-w-[34ch] text-[15px] text-[var(--ink-soft)]">
+            <p style={{ fontSize: 15, color: "var(--ink-soft)", marginTop: 16, maxWidth: "34ch" }}>
               A pre-order for the upcoming streetwear collection from Orbit Shop, settled in GAS on weavepay-1.
             </p>
-            <div className="mt-8 rounded-[16px] bg-[var(--ink)] p-6 text-[var(--paper-soft)]">
-              <p className="eyebrow text-[#a29682]">Paying</p>
-              <p className="mt-3 text-[18px] font-extrabold">{invoice.merchant}</p>
-              <p className="eyebrow mt-8 text-[#a29682]">Amount due</p>
-              <p className="serif-display mt-3 text-[56px] leading-none">{invoice.amount} GAS</p>
+            <div style={{ background: "var(--ink)", color: "var(--paper-soft)", borderRadius: 16, padding: 24, marginTop: 28 }}>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#A29682" }}>Paying</p>
+              <p style={{ fontSize: 18, fontWeight: 800, marginTop: 8 }}>{invoice.merchant}</p>
+              <div style={{ height: 20 }} />
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#A29682" }}>Amount due</p>
+              <p className="serif" style={{ fontSize: 56, letterSpacing: "-0.02em", lineHeight: 1, marginTop: 8 }}>{invoice.amount} GAS</p>
               <DynamicPayInvoiceAction amount={invoice.amount} invoiceId={invoice.id} />
             </div>
           </div>
 
           {/* Timeline */}
-          <div className="ink-card relative overflow-hidden p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_90%_100%,var(--plum),transparent_60%)] opacity-[0.55]" />
-            <div className="relative">
-              <div className="flex items-start justify-between gap-4">
+          <div style={{ borderRadius: 20, background: "var(--ink)", color: "var(--paper-soft)", padding: 32, position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(400px 200px at 90% 100%,var(--plum),transparent 60%)", opacity: 0.55, pointerEvents: "none" }} />
+            <div style={{ position: "relative" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
                 <div>
-                  <p className="eyebrow text-[#a29682]">Settlement timeline</p>
-                  <h2 className="serif-display mt-4 max-w-[12ch] text-[28px] leading-[1.2]">
+                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#A29682" }}>Settlement timeline</p>
+                  <h2 className="serif" style={{ fontSize: 28, lineHeight: 1.2, marginTop: 8, maxWidth: "12ch" }}>
                     Clean path from invoice to merchant.
                   </h2>
-                  <p className="mt-3 text-[14px] text-[#a29682]">Every step is on-chain and inspectable.</p>
+                  <p style={{ fontSize: 14, color: "#A29682", marginTop: 8 }}>Every step is on-chain and inspectable.</p>
                 </div>
-                <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.15)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
-                  Pending
-                </span>
+                <span className="chip chip-lime">Pending</span>
               </div>
-              <div className="mt-8 grid gap-3">
+              <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 28 }}>
                 {receiptSteps.map(([title, meta], index) => (
-                  <div key={title} className="grid grid-cols-[44px_1fr] items-center gap-4 rounded-[14px] border border-white/10 bg-white/5 p-4">
-                    <div className="serif-display flex h-11 w-11 items-center justify-center rounded-[12px] bg-[var(--accent)] text-[18px] text-[var(--ink)]">
-                      {index + 1}
-                    </div>
+                  <div key={title} style={{ display: "grid", gridTemplateColumns: "44px 1fr", gap: 16, alignItems: "center", padding: 16, border: "1px solid rgba(255,255,255,0.1)", borderRadius: 14, background: "rgba(255,255,255,0.04)" }}>
+                    <div className="serif" style={{ width: 44, height: 44, background: "var(--accent)", color: "var(--ink)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{index + 1}</div>
                     <div>
-                      <p className="text-sm font-bold">{title}</p>
-                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.1em] text-[#a29682]">{meta}</p>
+                      <p style={{ fontSize: 14, fontWeight: 700 }}>{title}</p>
+                      <p style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em", color: "#A29682", marginTop: 2 }}>{meta}</p>
                     </div>
                   </div>
                 ))}
@@ -73,7 +66,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

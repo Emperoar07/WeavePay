@@ -9,7 +9,7 @@ import { appConfig, weavePayAbi } from "@/lib/weavepay";
 
 const CreateInvoiceAction = dynamic(
   () => import("@/components/initia-actions").then((mod) => mod.CreateInvoiceAction),
-  { ssr: false, loading: () => <div className="h-12 w-full rounded-full bg-[var(--ink)]" /> },
+  { ssr: false, loading: () => <div style={{ height: 52, borderRadius: 14, background: "var(--ink)" }} /> },
 );
 
 const readChain = defineChain({
@@ -53,56 +53,52 @@ export default function NewInvoicePage() {
 
   return (
     <main className="page-shell">
-      <div className="content-shell pt-12">
-        <div className="page-label">Create invoice · /invoices/new</div>
-      </div>
+      <div className="wrap">
+        <AppNav />
 
-      <AppNav />
-
-      <section className="content-shell mt-8 pb-16">
-        <div className="grid grid-cols-2 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 28 }}>
           {/* Form */}
-          <div className="section-card p-9">
+          <div style={{ border: "1px solid var(--line)", borderRadius: 20, background: "var(--paper-soft)", padding: 36 }}>
             <div className="kicker"><span className="kicker-dot" />Merchant action</div>
-            <h1 className="serif-display mt-5 text-[32px]">Create invoice</h1>
-            <p className="mt-3 max-w-[38ch] text-[14px] text-[var(--ink-soft)]">
+            <h1 className="serif" style={{ fontSize: 32, marginTop: 16 }}>Create invoice</h1>
+            <p style={{ fontSize: 14, color: "var(--ink-soft)", marginTop: 8, maxWidth: "38ch" }}>
               Generate a payment request, mint it on the rollup, and immediately share the buyer link.
             </p>
-            <div className="mt-8 space-y-5">
-              <label className="block">
-                <span className="eyebrow">Merchant EVM address</span>
-                <input className="field-input mt-3" value={merchant} onChange={(e) => setMerchant(e.target.value)} />
-              </label>
-              <label className="block">
-                <span className="eyebrow">Amount in GAS</span>
-                <input className="field-input mt-3" value={amount} onChange={(e) => setAmount(e.target.value)} />
-              </label>
-              <label className="block">
-                <span className="eyebrow">Description</span>
-                <textarea className="field-input mt-3 min-h-[100px] resize-none" value={description} onChange={(e) => setDescription(e.target.value)} />
-              </label>
+            <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 18 }}>
+              <div>
+                <label className="field-label">Merchant EVM address</label>
+                <input className="field-input" value={merchant} onChange={(e) => setMerchant(e.target.value)} />
+              </div>
+              <div>
+                <label className="field-label">Amount in GAS</label>
+                <input className="field-input" value={amount} onChange={(e) => setAmount(e.target.value)} />
+              </div>
+              <div>
+                <label className="field-label">Description</label>
+                <textarea className="field-textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
+              </div>
               <CreateInvoiceAction amount={amount} merchant={merchant} metadataURI={metadataURI} onSuccess={handleSuccess} />
             </div>
           </div>
 
-          {/* Preview */}
-          <div className="ink-card relative overflow-hidden p-9">
-            <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-60 w-60 bg-[radial-gradient(circle,var(--rust),transparent_70%)] opacity-40" />
-            <div className="relative">
-              <div className="flex items-start justify-between gap-4">
+          {/* Dark preview */}
+          <div style={{ borderRadius: 20, background: "var(--ink)", color: "var(--paper-soft)", padding: 36, position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: -60, right: -60, width: 240, height: 240, background: "radial-gradient(circle,var(--rust),transparent 70%)", opacity: 0.4, pointerEvents: "none" }} />
+            <div style={{ position: "relative" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 28 }}>
                 <div>
-                  <p className="eyebrow text-[#a29682]">Buyer experience</p>
-                  <h2 className="serif-display mt-3 text-[26px]">Checkout preview</h2>
+                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#A29682" }}>Buyer experience</p>
+                  <h2 className="serif" style={{ fontSize: 26, marginTop: 6 }}>Checkout preview</h2>
                 </div>
-                <div className="serif-display rounded-full bg-white/10 px-4 py-2 text-[15px]">WP {displayId}</div>
+                <span className="serif" style={{ fontSize: 15, padding: "8px 16px", background: "rgba(255,255,255,0.08)", borderRadius: 999, whiteSpace: "nowrap" }}>WP {displayId}</span>
               </div>
-              <div className="mt-8 rounded-[16px] bg-[var(--paper-soft)] p-7 text-[var(--ink)]">
-                <p className="eyebrow">Amount due</p>
-                <p className="serif-display mt-2 text-[64px] leading-none">{amount || "0"} GAS</p>
-                <p className="mt-4 text-[14px] text-[var(--ink-soft)]">{description}</p>
-                <div className="mt-6 flex items-center justify-between gap-3 rounded-[12px] border border-dashed border-[var(--line-strong)] bg-[var(--paper)] px-4 py-4 text-[13px] font-bold">
-                  <span className="min-w-0 flex-1 break-all">{checkoutUrl}</span>
-                  <button className="bg-transparent p-0" onClick={copyLink} title="Copy checkout link" type="button">
+              <div style={{ background: "var(--paper-soft)", color: "var(--ink)", padding: 28, borderRadius: 16 }}>
+                <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)" }}>Amount due</p>
+                <p className="serif" style={{ fontSize: 64, letterSpacing: "-0.03em", lineHeight: 1, marginTop: 4 }}>{amount || "0"} GAS</p>
+                <p style={{ fontSize: 14, color: "var(--ink-soft)", marginTop: 12 }}>{description}</p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginTop: 20, padding: "14px 16px", border: "1px dashed var(--line-strong)", borderRadius: 12, background: "var(--paper)", fontSize: 13, fontWeight: 700, wordBreak: "break-all" }}>
+                  <span style={{ minWidth: 0, flex: 1 }}>{checkoutUrl}</span>
+                  <button onClick={copyLink} title="Copy" type="button" style={{ background: "transparent", border: "none", padding: 0, opacity: 0.6 }}>
                     <Copy size={16} />
                   </button>
                 </div>
@@ -110,7 +106,7 @@ export default function NewInvoicePage() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

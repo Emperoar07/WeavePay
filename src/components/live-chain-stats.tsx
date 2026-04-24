@@ -17,12 +17,33 @@ const chain = defineChain({
   rpcUrls: { default: { http: [appConfig.jsonRpcUrl] } },
 });
 
+const rowStyle = {
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  gap: 16,
+  padding: "14px 24px",
+  borderTop: "1px solid var(--line)",
+  fontSize: 13,
+} as const;
+
+const keyStyle = {
+  fontSize: 10,
+  fontWeight: 700,
+  letterSpacing: "0.2em",
+  textTransform: "uppercase" as const,
+  color: "var(--muted)",
+};
+
+const valStyle = {
+  fontWeight: 700,
+  wordBreak: "break-all" as const,
+  textAlign: "right" as const,
+  maxWidth: 200,
+};
+
 export function LiveChainStats() {
-  const [stats, setStats] = useState<Stats>({
-    invoiceCount: null,
-    protocolFeeBps: null,
-    error: null,
-  });
+  const [stats, setStats] = useState<Stats>({ invoiceCount: null, protocolFeeBps: null, error: null });
 
   useEffect(() => {
     const addr = appConfig.contractAddress;
@@ -40,44 +61,35 @@ export function LiveChainStats() {
           client.readContract({ address: addr as `0x${string}`, abi: weavePayAbi, functionName: "invoiceCount" }),
           client.readContract({ address: addr as `0x${string}`, abi: weavePayAbi, functionName: "protocolFeeBps" }),
         ]);
-
-        if (!cancelled) {
-          setStats({ invoiceCount: count, protocolFeeBps: feeBps, error: null });
-        }
+        if (!cancelled) setStats({ invoiceCount: count, protocolFeeBps: feeBps, error: null });
       } catch (err) {
-        if (!cancelled) {
-          setStats((s) => ({ ...s, error: (err as Error).message }));
-        }
+        if (!cancelled) setStats((s) => ({ ...s, error: (err as Error).message }));
       }
     }
 
     load();
     const id = setInterval(load, 10_000);
-
-    return () => {
-      cancelled = true;
-      clearInterval(id);
-    };
+    return () => { cancelled = true; clearInterval(id); };
   }, []);
 
   if (stats.error) {
     return (
-      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
-        <span className="eyebrow">Live chain</span>
-        <span className="text-right font-bold text-[var(--muted)]">{stats.error}</span>
+      <div style={rowStyle}>
+        <span style={keyStyle}>Live chain</span>
+        <span style={{ ...valStyle, color: "var(--muted)" }}>{stats.error}</span>
       </div>
     );
   }
 
   return (
     <>
-      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
-        <span className="eyebrow">Invoices on-chain</span>
-        <span className="font-bold">{stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}</span>
+      <div style={rowStyle}>
+        <span style={keyStyle}>Invoices on-chain</span>
+        <span style={valStyle}>{stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}</span>
       </div>
-      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
-        <span className="eyebrow">Fee</span>
-        <span className="font-bold">{stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}</span>
+      <div style={rowStyle}>
+        <span style={keyStyle}>Fee</span>
+        <span style={valStyle}>{stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}</span>
       </div>
     </>
   );

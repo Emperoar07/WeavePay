@@ -1,35 +1,7 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { AppNav } from "@/components/app-nav";
-
-const features = [
-  {
-    number: "01",
-    title: "Create",
-    body: "Merchants generate an invoice and a checkout link in a few fields.",
-    href: "/invoices/new",
-    cta: "Start creating →",
-    dark: false,
-  },
-  {
-    number: "02",
-    title: "Checkout",
-    body: "Buyers open a single invoice page and pay with wallet-native flow.",
-    href: "/checkout/1041",
-    cta: "Preview checkout →",
-    dark: true,
-  },
-  {
-    number: "03",
-    title: "Verify",
-    body: "Judges can inspect chain ID, contract, and transaction state in one place.",
-    href: "/settings",
-    cta: "Open settings →",
-    dark: false,
-  },
-];
 
 const liveFeed = [
   { label: "WP 1042 · Nexa Labs", value: "$420", pending: false },
@@ -38,52 +10,62 @@ const liveFeed = [
   { label: "WP 1039 · Lagos Market", value: "$215", pending: false },
 ];
 
+const features = [
+  { number: "01", title: "Create", body: "Merchants generate an invoice and a checkout link in a few fields.", href: "/invoices/new", cta: "Start creating →", dark: false },
+  { number: "02", title: "Checkout", body: "Buyers open a single invoice page and pay with wallet-native flow.", href: "/checkout/1041", cta: "Preview checkout →", dark: true },
+  { number: "03", title: "Verify", body: "Judges can inspect chain ID, contract, and transaction state in one place.", href: "/settings", cta: "Open settings →", dark: false },
+];
+
 export default function Home() {
   return (
     <main className="page-shell">
+      <div className="wrap">
+        <AppNav />
 
-      {/* Page label */}
-      <div className="content-shell pt-12">
-        <div className="page-label">Design 01 · Editorial Cream</div>
-      </div>
-
-      {/* Nav */}
-      <AppNav />
-
-      {/* Hero card */}
-      <section className="content-shell mt-8">
-        <div className="grid grid-cols-[1.1fr_0.9fr] gap-10 rounded-[24px] border border-[var(--line)] bg-[linear-gradient(180deg,var(--paper-soft)_0%,var(--paper)_100%)] p-12">
+        {/* Hero */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1.1fr 0.9fr",
+          gap: 40,
+          marginTop: 28,
+          border: "1px solid var(--line)",
+          borderRadius: 24,
+          background: "linear-gradient(180deg,var(--paper-soft) 0%,var(--paper) 100%)",
+          padding: 48,
+        }}>
           <div>
             <div className="kicker"><span className="kicker-dot" />Testnet live · weavepay-1</div>
-            <h1 className="serif-display mt-5 text-[68px] leading-[1] max-w-[10ch]">
-              Checkout links that <em className="not-italic italic text-[var(--rust)]">settle</em> on your own chain.
+            <h1 className="serif" style={{ fontSize: 68, lineHeight: 1, maxWidth: "10ch", marginTop: 20 }}>
+              Checkout links that <em style={{ fontStyle: "italic", color: "var(--rust)" }}>settle</em> on your own chain.
             </h1>
-            <p className="mt-5 text-[17px] text-[var(--ink-soft)] max-w-[48ch]">
+            <p style={{ fontSize: 17, color: "var(--ink-soft)", maxWidth: "48ch", marginTop: 20 }}>
               WeavePay gives merchants a compact payment stack — create an invoice, share a buyer link, and settle value directly on an Initia EVM rollup with wallet-native UX.
             </p>
-            <div className="mt-7 flex gap-3">
-              <Link className="action-primary" href="/dashboard">Open dashboard <ArrowRight size={16} /></Link>
-              <Link className="action-accent" href="/invoices/new">Create invoice</Link>
+            <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
+              <Link href="/dashboard" className="btn btn-primary">Open dashboard →</Link>
+              <Link href="/invoices/new" className="btn btn-accent">Create invoice</Link>
             </div>
-            <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-[var(--line-strong)] pt-7">
-              <div><dt className="eyebrow">Processed</dt><dd className="serif-display mt-1 text-[22px]">$12.4k</dd></div>
-              <div><dt className="eyebrow">Platform fee</dt><dd className="serif-display mt-1 text-[22px]">1.00%</dd></div>
-              <div><dt className="eyebrow">Block cadence</dt><dd className="serif-display mt-1 text-[22px]">100ms</dd></div>
+            <dl style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginTop: 40, paddingTop: 28, borderTop: "1px solid var(--line-strong)" }}>
+              <div><dt className="eyebrow">Processed</dt><dd className="serif" style={{ fontSize: 22, marginTop: 4 }}>$12.4k</dd></div>
+              <div><dt className="eyebrow">Platform fee</dt><dd className="serif" style={{ fontSize: 22, marginTop: 4 }}>1.00%</dd></div>
+              <div><dt className="eyebrow">Block cadence</dt><dd className="serif" style={{ fontSize: 22, marginTop: 4 }}>100ms</dd></div>
             </dl>
           </div>
-          <div className="ink-card relative overflow-hidden p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_120%_-20%,var(--plum)_0%,transparent_60%)] opacity-60" />
-            <div className="relative">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a29682]">Live invoice feed</p>
-              <h2 className="serif-display mt-2 text-[28px]">Merchant revenue, visible.</h2>
-              <div className="mt-7 flex flex-col gap-3">
+
+          {/* Dark feed card */}
+          <div style={{ borderRadius: 20, background: "var(--ink)", color: "var(--paper-soft)", padding: 32, position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(600px 200px at 120% -20%,var(--plum),transparent 60%)", opacity: 0.6, pointerEvents: "none" }} />
+            <div style={{ position: "relative" }}>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#A29682" }}>Live invoice feed</p>
+              <h2 className="serif" style={{ fontSize: 28, marginTop: 8 }}>Merchant revenue, visible.</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 24 }}>
                 {liveFeed.map((row) => (
-                  <div key={row.label} className="flex items-center justify-between rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-[13px]">
-                    <b className="font-bold">{row.label}</b>
+                  <div key={row.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, fontSize: 13 }}>
+                    <b style={{ fontWeight: 700 }}>{row.label}</b>
                     {row.pending ? (
-                      <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.18)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">Pending</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "4px 12px", borderRadius: 999, background: "rgba(200,242,79,0.18)", color: "var(--accent)", border: "1px solid rgba(200,242,79,0.3)" }}>Pending</span>
                     ) : (
-                      <span className="serif-display text-base">{row.value}</span>
+                      <span className="serif" style={{ fontSize: 16 }}>{row.value}</span>
                     )}
                   </div>
                 ))}
@@ -91,25 +73,29 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Feature cards */}
-      <section className="content-shell mt-4 pb-16">
-        <div className="grid grid-cols-3 gap-4">
+        {/* Feature cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginTop: 16 }}>
           {features.map((f) => (
-            <Link key={f.title} href={f.href}
-              className={`flex flex-col rounded-[18px] border border-[var(--line)] p-7 transition hover:-translate-y-0.5 ${
-                f.dark ? "bg-[var(--ink)] text-[var(--paper-soft)]" : "bg-[var(--paper-soft)]"
-              }`}
-            >
-              <div className={`serif-display text-[60px] leading-[0.8] tracking-[-0.04em] ${f.dark ? "text-[#312c25]" : "text-[var(--paper-hard)]"}`}>{f.number}</div>
-              <h3 className="serif-display mt-3 text-[22px]">{f.title}</h3>
-              <p className={`mt-3 flex-1 text-sm ${f.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{f.body}</p>
-              <span className={`mt-5 text-sm font-bold border-b-[1.5px] pb-0.5 w-max ${f.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)] text-[var(--ink)]"}`}>{f.cta}</span>
+            <Link key={f.title} href={f.href} style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: 28,
+              border: "1px solid var(--line)",
+              borderRadius: 18,
+              background: f.dark ? "var(--ink)" : "var(--paper-soft)",
+              color: f.dark ? "var(--paper-soft)" : "var(--ink)",
+              borderColor: f.dark ? "var(--ink)" : "var(--line)",
+              transition: "transform 120ms",
+            }}>
+              <span className="serif" style={{ fontSize: 60, lineHeight: 0.8, letterSpacing: "-0.04em", color: f.dark ? "#312C25" : "var(--paper-hard)" }}>{f.number}</span>
+              <h3 className="serif" style={{ fontSize: 22, marginTop: 12 }}>{f.title}</h3>
+              <p style={{ fontSize: 14, color: f.dark ? "#A29682" : "var(--ink-soft)", marginTop: 10, flex: 1 }}>{f.body}</p>
+              <span style={{ display: "inline-block", fontSize: 13, fontWeight: 700, borderBottom: `1.5px solid ${f.dark ? "var(--accent)" : "var(--ink)"}`, paddingBottom: 2, color: f.dark ? "var(--accent)" : "var(--ink)", marginTop: 20, width: "max-content" }}>{f.cta}</span>
             </Link>
           ))}
         </div>
-      </section>
+      </div>
     </main>
   );
 }
