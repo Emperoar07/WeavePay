@@ -1,5 +1,3 @@
-import { BarChart3, Plus, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 import { AppNav } from "@/components/app-nav";
 import { InvoiceList } from "@/components/invoice-list";
 import { LiveChainStats } from "@/components/live-chain-stats";
@@ -11,56 +9,56 @@ export default function DashboardPage() {
     <main className="page-shell">
       <AppNav />
 
-      <section className="content-shell pb-10 pt-6">
-        <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div className="section-card p-6 sm:p-8">
+      <section className="content-shell pb-10 pt-7">
+        <div className="flex flex-col gap-5 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-6 py-8 lg:flex-row lg:items-end lg:justify-between lg:px-9">
+          <div>
             <div className="kicker">
-              <ShieldCheck size={15} className="text-[var(--green)]" />
-              Merchant dashboard
+              <span className="kicker-dot" />
+              Merchant command center
             </div>
-            <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl">
-              Settlement command center
+            <h1 className="serif-display mt-4 text-[42px] leading-none">
+              Settlement revenue, <span className="italic text-[var(--rust)]">live</span>.
             </h1>
-            <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-[var(--muted)]">
+            <p className="mt-3 max-w-[50ch] text-[15px] text-[var(--ink-soft)]">
               Track invoices, inspect payment state, and show that WeavePay is pointing at a real Initia testnet rollup.
             </p>
           </div>
 
-          <Link className="action-accent lg:self-center" href="/invoices/new">
-            <Plus size={16} />
-            New invoice
-          </Link>
+          <a className="action-accent" href="/invoices/new">
+            + New invoice
+          </a>
         </div>
 
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <MetricCard value="$12.4k" label="processed" />
-          <MetricCard value="$124" label="fees earned" />
-          <MetricCard value="32" label="invoices" />
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <MetricCard value="$12.4k" label="Processed" />
+          <MetricCard value="$124" label="Fees earned" className="border-[var(--ink)] bg-[var(--accent)]" />
+          <MetricCard value="32" label="Invoices" className="border-[var(--ink)] bg-[var(--ink)] text-[var(--paper-soft)] [&_p:last-child]:text-[#a29682]" />
         </div>
 
-        <div className="mt-4 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
           <InvoiceList />
 
-          <div className="section-card p-5 sm:p-6">
-            <div className="flex items-start gap-3">
-              <div className="flex size-11 items-center justify-center rounded-2xl bg-[var(--paper)] text-[var(--green)]">
-                <BarChart3 size={20} />
-              </div>
-              <div>
-                <h2 className="text-2xl font-black">Live configuration</h2>
-                <p className="mt-2 text-sm font-medium leading-6 text-[var(--muted)]">
-                  These values tell judges and users exactly which chain and contract this frontend is targeting.
-                </p>
-              </div>
+          <div className="section-card overflow-hidden">
+            <div className="border-b border-[var(--line)] px-6 py-5">
+              <h2 className="serif-display text-[22px]">Live config</h2>
+              <p className="mt-1 text-xs text-[var(--muted)]">These values point the UI at testnet.</p>
             </div>
-
-            <div className="mt-6 space-y-3 text-sm font-bold">
-              <p className="rounded-2xl bg-[var(--paper)] p-4">Chain ID: {appConfig.chainId}</p>
-              <p className="rounded-2xl bg-[var(--paper)] p-4">Denom: {appConfig.denom}</p>
-              <p className="break-all rounded-2xl bg-[var(--paper)] p-4">
-                Contract: {appConfig.contractAddress || "Not deployed yet"}
-              </p>
-              <LiveChainStats />
+            <div className="divide-y divide-[var(--line)] text-[13px]">
+              <div className="flex items-start justify-between gap-4 px-6 py-4">
+                <span className="eyebrow">Chain ID</span>
+                <span className="font-bold">{appConfig.chainId}</span>
+              </div>
+              <div className="flex items-start justify-between gap-4 px-6 py-4">
+                <span className="eyebrow">Denom</span>
+                <span className="font-bold">{appConfig.denom}</span>
+              </div>
+              <div className="flex items-start justify-between gap-4 px-6 py-4">
+                <span className="eyebrow">Contract</span>
+                <span className="max-w-[17rem] break-all text-right font-bold">{appConfig.contractAddress || "Not deployed yet"}</span>
+              </div>
+              <div className="px-6 py-4">
+                <LiveChainStats />
+              </div>
             </div>
           </div>
         </div>

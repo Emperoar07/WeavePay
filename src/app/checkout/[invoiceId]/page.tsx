@@ -1,9 +1,13 @@
-import { BadgeCheck, ShieldCheck } from "lucide-react";
 import { AppNav } from "@/components/app-nav";
 import { DynamicPayInvoiceAction } from "@/components/initia-dynamic";
 import { demoInvoices } from "@/lib/weavepay";
 
-const receiptSteps = ["Invoice created", "Wallet connected", "Payment signed", "Merchant settled"];
+const receiptSteps = [
+  ["Invoice created", "Merchant · 11m ago"],
+  ["Wallet connected", "Buyer · now"],
+  ["Payment signed", "Pending"],
+  ["Merchant settled", "Waiting"],
+];
 
 export default async function CheckoutPage({ params }: { params: Promise<{ invoiceId: string }> }) {
   const { invoiceId } = await params;
@@ -11,57 +15,64 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
 
   return (
     <main className="page-shell">
+      <div className="content-shell pt-8">
+        <div className="page-label">Checkout · /checkout/{invoice.id}</div>
+      </div>
+
       <AppNav />
 
-      <section className="content-shell pb-10 pt-6">
-        <div className="grid gap-4 lg:grid-cols-[0.84fr_1.16fr]">
-          <div className="section-card p-5 sm:p-6">
+      <section className="content-shell pb-10 pt-7">
+        <div className="grid gap-4 lg:grid-cols-[1fr_1.3fr]">
+          <div className="section-card p-9">
             <div className="kicker">
-              <ShieldCheck size={15} className="text-[var(--green)]" />
+              <span className="kicker-dot" />
               Buyer checkout
             </div>
+            <h1 className="serif-display mt-7 max-w-[9ch] text-[42px] leading-[1.05]">
+              Orbit Shop · Limited drop
+            </h1>
+            <p className="mt-6 max-w-[34ch] text-[15px] text-[var(--ink-soft)]">
+              A pre-order for the upcoming streetwear collection from Orbit Shop, settled in GAS on weavepay-1.
+            </p>
 
-            <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl">{invoice.label}</h1>
-            <p className="mt-4 text-sm font-medium leading-6 text-[var(--muted)]">{invoice.description}</p>
-
-            <div className="mt-7 rounded-[1.25rem] bg-[var(--paper)] p-4">
-              <p className="eyebrow">Paying</p>
-              <p className="mt-2 text-xl font-black">{invoice.merchant}</p>
-              <p className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-[var(--muted)]">Amount due</p>
-              <p className="mt-2 text-5xl font-black tracking-tight">{invoice.amount} GAS</p>
+            <div className="mt-8 rounded-[16px] bg-[var(--ink)] p-6 text-[var(--paper-soft)]">
+              <p className="eyebrow text-[#a29682]">Paying</p>
+              <p className="mt-3 text-[18px] font-extrabold">{invoice.merchant}</p>
+              <p className="eyebrow mt-8 text-[#a29682]">Amount due</p>
+              <p className="serif-display mt-3 text-[56px] leading-none">{invoice.amount} GAS</p>
+              <DynamicPayInvoiceAction amount={invoice.amount} invoiceId={invoice.id} />
             </div>
-
-            <DynamicPayInvoiceAction amount={invoice.amount} invoiceId={invoice.id} />
           </div>
 
-          <div className="ink-card p-5 sm:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="eyebrow text-white/55">Payment flow</p>
-                <h2 className="mt-2 text-3xl font-black tracking-tight">Settlement timeline</h2>
-                <p className="mt-3 text-sm font-medium leading-6 text-white/68">
-                  A simple path from invoice creation to merchant funds landing on the rollup.
-                </p>
+          <div className="ink-card relative overflow-hidden p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_90%_100%,var(--plum),transparent_60%)] opacity-55" />
+            <div className="relative">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="eyebrow text-[#a29682]">Settlement timeline</p>
+                  <h2 className="serif-display mt-4 max-w-[12ch] text-[28px] leading-[1.2]">
+                    Clean path from invoice to merchant.
+                  </h2>
+                  <p className="mt-3 text-[14px] text-[#a29682]">Every step is on-chain and inspectable.</p>
+                </div>
+                <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.15)] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
+                  Pending
+                </span>
               </div>
-              <div className="rounded-full bg-white/10 px-3 py-2 text-sm font-black">{invoice.status}</div>
-            </div>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {receiptSteps.map((step, index) => (
-                <div key={step} className="rounded-[1.1rem] border border-white/10 bg-white/6 p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-2xl bg-[var(--accent)] text-[var(--ink)]">
-                      <BadgeCheck size={16} />
+              <div className="mt-8 grid gap-4">
+                {receiptSteps.map(([title, meta], index) => (
+                  <div key={title} className="grid grid-cols-[44px_1fr] items-center gap-4 rounded-[14px] border border-white/10 bg-white/5 p-4">
+                    <div className="serif-display flex h-11 w-11 items-center justify-center rounded-[12px] bg-[var(--accent)] text-[28px] text-[var(--ink)]">
+                      {index + 1}
                     </div>
                     <div>
-                      <p className="text-sm font-black">{step}</p>
-                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/48">
-                        Step {index + 1}
-                      </p>
+                      <p className="text-sm font-bold">{title}</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.1em] text-[#a29682]">{meta}</p>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

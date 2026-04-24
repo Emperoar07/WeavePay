@@ -1,112 +1,109 @@
 "use client";
 
-import { ArrowRight, ShieldCheck, Sparkles, WalletCards } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { AppNav } from "@/components/app-nav";
 import { MetricCard } from "@/components/metric-card";
 
-const lanes = [
+const features = [
   {
+    number: "01",
     title: "Create",
-    body: "Generate invoices fast, attach clear payment intent, and mint the request straight onto your rollup.",
+    body: "Merchants generate an invoice and a checkout link in a few fields.",
     href: "/invoices/new",
   },
   {
+    number: "02",
     title: "Checkout",
-    body: "Give buyers a clean wallet payment page with InterwovenKit handling connect and signing.",
+    body: "Buyers open a single invoice page and pay with wallet-native flow.",
     href: "/checkout/1041",
+    dark: true,
   },
   {
+    number: "03",
     title: "Verify",
-    body: "Show judges the chain config, contract address, and settlement proof without sending them digging.",
+    body: "Judges can inspect chain ID, contract, and transaction state in one place.",
     href: "/settings",
   },
+];
+
+const liveFeed = [
+  { label: "WP 1042 · Nexa Labs", value: "$420", pending: false },
+  { label: "WP 1041 · Orbit Shop", value: "Pending", pending: true },
+  { label: "WP 1040 · Design DAO", value: "$860", pending: false },
+  { label: "WP 1039 · Lagos Market", value: "$215", pending: false },
 ];
 
 export default function Home() {
   return (
     <main className="page-shell">
+      <div className="content-shell pt-8">
+        <div className="page-label">Design 01 · Editorial Cream</div>
+      </div>
+
       <AppNav />
 
-      <section className="content-shell pb-6 pt-6 sm:pb-8 sm:pt-8">
-        <div className="grid gap-5 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-          <div className="section-card overflow-hidden p-6 sm:p-8">
+      <section className="content-shell pb-6 pt-7">
+        <div className="grid gap-6 rounded-[24px] border border-[var(--line)] bg-[linear-gradient(180deg,var(--paper-soft)_0%,var(--paper)_100%)] p-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:p-12">
+          <div>
             <div className="kicker">
-              <ShieldCheck size={15} className="text-[var(--green)]" />
-              Initia EVM testnet checkout
+              <span className="kicker-dot" />
+              Testnet live · weavepay-1
             </div>
 
-            <div className="mt-6 max-w-3xl">
-              <p className="eyebrow">Merchant revenue on your own appchain</p>
-              <h1 className="mt-3 max-w-[12ch] text-5xl font-black leading-[0.9] tracking-tight sm:max-w-none sm:text-6xl lg:text-7xl">
-                Payment links built for the Interwoven economy.
-              </h1>
-              <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
-                WeavePay gives merchants a compact payment stack: create an invoice, share a focused buyer link, and settle value on an Initia rollup with wallet-native UX.
-              </p>
-            </div>
+            <h1 className="serif-display mt-5 max-w-[10ch] text-[3.35rem] leading-[0.95] sm:text-[4.4rem]">
+              Checkout links that <span className="italic text-[var(--rust)]">settle</span> on your own chain.
+            </h1>
 
-            <div className="mt-8 grid gap-3 sm:flex">
+            <p className="mt-5 max-w-[48ch] text-base text-[var(--ink-soft)] sm:text-[17px]">
+              WeavePay gives merchants a compact payment stack: create an invoice, share a buyer link, and settle value directly on an Initia EVM rollup with wallet-native UX.
+            </p>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link className="action-primary" href="/dashboard">
                 Open dashboard
                 <ArrowRight size={16} />
               </Link>
               <Link className="action-accent" href="/invoices/new">
                 Create invoice
-                <Sparkles size={16} />
               </Link>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-[1.1rem] border border-black/10 bg-[var(--paper)] p-4">
-                <p className="eyebrow">Settlement path</p>
-                <p className="mt-2 text-sm font-bold leading-6 text-[var(--muted)]">
-                  Connect on Initia, sign once, settle directly on the WeavePay rollup.
-                </p>
+            <dl className="mt-10 grid gap-4 border-t border-[var(--line-strong)] pt-6 sm:grid-cols-3">
+              <div className="stat-block">
+                <dt>Processed</dt>
+                <dd>$12.4k</dd>
               </div>
-              <div className="rounded-[1.1rem] border border-black/10 bg-[var(--paper)] p-4">
-                <p className="eyebrow">Judge ready</p>
-                <p className="mt-2 text-sm font-bold leading-6 text-[var(--muted)]">
-                  Every route points to a clear action page instead of a pretty dead end.
-                </p>
+              <div className="stat-block">
+                <dt>Platform fee</dt>
+                <dd>1.00%</dd>
               </div>
-              <div className="rounded-[1.1rem] border border-black/10 bg-[var(--paper)] p-4">
-                <p className="eyebrow">Mobile first</p>
-                <p className="mt-2 text-sm font-bold leading-6 text-[var(--muted)]">
-                  Compact controls, readable type, and no dashboard sprawl on small screens.
-                </p>
+              <div className="stat-block">
+                <dt>Block cadence</dt>
+                <dd>100ms</dd>
               </div>
-            </div>
+            </dl>
           </div>
 
-          <div className="ink-card overflow-hidden p-6 sm:p-8">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="eyebrow text-white/55">Live product framing</p>
-                <h2 className="mt-2 text-2xl font-black sm:text-3xl">Compact merchant rail</h2>
-              </div>
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-white/10">
-                <WalletCards size={20} />
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
-              <MetricCard value="$12.4k" label="processed" />
-              <MetricCard value="1.0%" label="platform fee" />
-              <MetricCard value="100ms" label="block cadence" />
-            </div>
-
-            <div className="mt-8 rounded-[1.25rem] border border-white/10 bg-white/6 p-5">
-              <p className="eyebrow text-white/55">How it feels</p>
-              <div className="mt-4 space-y-4">
-                {[
-                  "Merchant creates a checkout link in a few fields.",
-                  "Buyer opens a single invoice page and pays with wallet-native flow.",
-                  "Judge verifies the chain setup and contract pointers without guesswork.",
-                ].map((line) => (
-                  <div key={line} className="flex items-start gap-3">
-                    <div className="mt-1 size-2 rounded-full bg-[var(--accent)]" />
-                    <p className="text-sm font-medium leading-6 text-white/78">{line}</p>
+          <div className="ink-card relative overflow-hidden p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_120%_-20%,var(--plum)_0%,transparent_60%)] opacity-60" />
+            <div className="relative">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a29682]">Live invoice feed</p>
+              <h2 className="serif-display mt-2 text-[28px]">Merchant revenue, visible.</h2>
+              <div className="mt-7 space-y-3">
+                {liveFeed.map((row) => (
+                  <div
+                    key={row.label}
+                    className="flex items-center justify-between rounded-[12px] border border-white/10 bg-white/5 px-4 py-4 text-[13px]"
+                  >
+                    <b className="font-bold">{row.label}</b>
+                    {row.pending ? (
+                      <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.18)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
+                        Pending
+                      </span>
+                    ) : (
+                      <span className="serif-display text-base">{row.value}</span>
+                    )}
                   </div>
                 ))}
               </div>
@@ -117,17 +114,22 @@ export default function Home() {
 
       <section className="content-shell pb-10">
         <div className="grid gap-4 md:grid-cols-3">
-          {lanes.map((lane) => (
+          {features.map((feature) => (
             <Link
-              key={lane.title}
-              className="section-card p-5 transition hover:-translate-y-0.5"
-              href={lane.href}
+              key={feature.title}
+              className={`rounded-[18px] border border-[var(--line)] p-7 transition hover:-translate-y-0.5 ${
+                feature.dark ? "bg-[var(--ink)] text-[var(--paper-soft)]" : "bg-[var(--paper-soft)]"
+              }`}
+              href={feature.href}
             >
-              <p className="text-2xl font-black tracking-tight">{lane.title}</p>
-              <p className="mt-3 text-sm font-bold leading-6 text-[var(--muted)]">{lane.body}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm font-black">
-                Continue
-                <ArrowRight size={16} />
+              <div className={`serif-display text-[60px] leading-[0.8] tracking-[-0.04em] ${feature.dark ? "text-[#312c25]" : "text-[var(--paper-hard)]"}`}>
+                {feature.number}
+              </div>
+              <h3 className="serif-display mt-3 text-[22px]">{feature.title}</h3>
+              <p className={`mt-3 text-sm ${feature.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{feature.body}</p>
+              <span className={`mt-5 inline-flex border-b-[1.5px] pb-0.5 text-sm font-bold ${feature.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)]"}`}>
+                {feature.title === "Create" ? "Start creating" : feature.title === "Checkout" ? "Preview checkout" : "Open settings"}{" "}
+                →
               </span>
             </Link>
           ))}

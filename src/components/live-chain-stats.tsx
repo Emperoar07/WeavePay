@@ -62,19 +62,21 @@ export function LiveChainStats() {
 
   if (stats.error) {
     return (
-      <p className="rounded-2xl bg-[var(--paper)] p-3 text-xs font-bold text-[var(--muted)]">
+      <p className="bg-[var(--paper)] px-4 py-4 text-xs font-bold text-[var(--muted)]">
         Live chain: {stats.error}
       </p>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2 text-sm font-bold sm:gap-3">
-      <p className="rounded-2xl bg-[var(--paper)] p-3">
-        Invoices on-chain: {stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}
+    <div className="divide-y divide-[var(--line)] text-sm font-bold">
+      <p className="flex items-start justify-between gap-4 px-0 py-4">
+        <span className="eyebrow">Invoices on-chain</span>
+        <span>{stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}</span>
       </p>
-      <p className="rounded-2xl bg-[var(--paper)] p-3">
-        Fee: {stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}
+      <p className="flex items-start justify-between gap-4 px-0 py-4">
+        <span className="eyebrow">Fee</span>
+        <span>{stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}</span>
       </p>
     </div>
   );

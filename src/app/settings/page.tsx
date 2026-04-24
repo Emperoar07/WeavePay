@@ -14,28 +14,37 @@ export default function SettingsPage() {
 
   return (
     <main className="page-shell">
+      <div className="content-shell pt-8">
+        <div className="page-label">Settings · /settings</div>
+      </div>
+
       <AppNav />
 
-      <section className="content-shell pb-10 pt-6">
-        <div className="section-card p-5 sm:p-6">
-          <p className="eyebrow">Judge verification</p>
-          <h1 className="mt-2 text-4xl font-black tracking-tight">Testnet settings</h1>
-          <p className="mt-4 max-w-2xl text-sm font-medium leading-6 text-[var(--muted)]">
-            These are the exact environment values the frontend uses to speak to the WeavePay rollup and contract.
-          </p>
+      <section className="content-shell pb-10 pt-7">
+        <div className="max-w-[860px]">
+          <div className="section-card p-9">
+            <div className="kicker">
+              <span className="kicker-dot" />
+              Judge verification
+            </div>
+            <h1 className="serif-display mt-5 text-[36px]">Testnet settings</h1>
+            <p className="mt-4 max-w-[50ch] text-[14px] text-[var(--ink-soft)]">
+              These are the exact environment values the frontend uses to speak to the WeavePay rollup and contract.
+            </p>
 
-          <div className="mt-6 overflow-hidden rounded-[1.1rem] border border-black/10">
-            {rows.map(([label, value], index) => (
-              <div
-                key={label}
-                className={`grid gap-2 bg-white px-4 py-4 sm:grid-cols-[0.28fr_0.72fr] sm:px-5 ${
-                  index === rows.length - 1 ? "" : "border-b border-black/10"
-                }`}
-              >
-                <p className="eyebrow">{label}</p>
-                <p className="break-all text-sm font-black">{value}</p>
-              </div>
-            ))}
+            <div className="mt-8 overflow-hidden rounded-[14px] border border-[var(--line)] bg-white">
+              {rows.map(([label, value], index) => (
+                <div
+                  key={label}
+                  className={`grid gap-3 px-5 py-4 text-[13px] sm:grid-cols-[180px_1fr] ${
+                    index === rows.length - 1 ? "" : "border-b border-[var(--line)]"
+                  }`}
+                >
+                  <div className="eyebrow">{label}</div>
+                  <div className="break-all font-mono text-sm font-bold">{value}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

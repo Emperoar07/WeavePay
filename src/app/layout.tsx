@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import { ExtensionErrorGuard } from "@/components/extension-error-guard";
 import { Providers } from "@/components/providers";
 import "./globals.css";
+
+const fraunces = Fraunces({
+  variable: "--font-serif",
+  subsets: ["latin"],
+});
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -26,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
       <body>
         <ExtensionErrorGuard />
         <Providers>{children}</Providers>
