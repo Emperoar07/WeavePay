@@ -13,18 +13,26 @@ export default function SettingsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[var(--paper)] text-[var(--ink)]">
+    <main className="page-shell">
       <AppNav />
-      <section className="mx-auto max-w-4xl px-4 pb-10 sm:px-5 md:px-8">
-        <div className="rounded-lg border border-black/10 bg-white p-5 shadow-sm">
-          <h1 className="text-3xl font-black">Testnet settings</h1>
-          <p className="mt-3 text-sm font-bold leading-6 text-[var(--muted)]">
-            Update `.env.local` after the WeavePay rollup and contract are deployed.
+
+      <section className="content-shell pb-10 pt-6">
+        <div className="section-card p-5 sm:p-6">
+          <p className="eyebrow">Judge verification</p>
+          <h1 className="mt-2 text-4xl font-black tracking-tight">Testnet settings</h1>
+          <p className="mt-4 max-w-2xl text-sm font-medium leading-6 text-[var(--muted)]">
+            These are the exact environment values the frontend uses to speak to the WeavePay rollup and contract.
           </p>
-          <div className="mt-6 divide-y divide-black/10 rounded-lg border border-black/10">
-            {rows.map(([label, value]) => (
-              <div key={label} className="grid gap-2 p-4 sm:grid-cols-[0.35fr_0.65fr]">
-                <p className="text-xs font-black uppercase text-[var(--muted)]">{label}</p>
+
+          <div className="mt-6 overflow-hidden rounded-[1.1rem] border border-black/10">
+            {rows.map(([label, value], index) => (
+              <div
+                key={label}
+                className={`grid gap-2 bg-white px-4 py-4 sm:grid-cols-[0.28fr_0.72fr] sm:px-5 ${
+                  index === rows.length - 1 ? "" : "border-b border-black/10"
+                }`}
+              >
+                <p className="eyebrow">{label}</p>
                 <p className="break-all text-sm font-black">{value}</p>
               </div>
             ))}

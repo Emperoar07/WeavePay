@@ -55,3 +55,6 @@ go[0-9]*.linux-amd64.tar.gz
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+.env*.local

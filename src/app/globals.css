@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f8f5ea;
-  --ink: #141414;
-  --muted: #66706a;
-  --green: #11a36a;
-  --accent: #b7ff4a;
-  --sky: #dff6ff;
+  --paper: #f5efe2;
+  --paper-strong: #efe6d5;
+  --surface: rgba(255, 252, 245, 0.84);
+  --surface-strong: #fffdf7;
+  --ink: #171412;
+  --muted: #6a6258;
+  --green: #159a68;
+  --accent: #d8ff63;
+  --accent-strong: #c8f24f;
+  --sky: #d8f0ff;
+  --line: rgba(23, 20, 18, 0.1);
+  --shadow: 0 18px 40px rgba(23, 20, 18, 0.08);
+  --shadow-soft: 0 10px 24px rgba(23, 20, 18, 0.06);
   --background: var(--paper);
   --foreground: var(--ink);
 }
@@ -22,17 +29,178 @@
   box-sizing: border-box;
 }
 
+html {
+  background: var(--paper);
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
   background:
-    radial-gradient(circle at 10% 10%, rgba(183, 255, 74, 0.18), transparent 30%),
-    radial-gradient(circle at 95% 5%, rgba(223, 246, 255, 0.85), transparent 28%),
-    var(--paper);
+    radial-gradient(circle at top left, rgba(216, 255, 99, 0.26), transparent 28%),
+    radial-gradient(circle at top right, rgba(216, 240, 255, 0.95), transparent 26%),
+    linear-gradient(180deg, #fbf7ec 0%, #f5efe2 46%, #efe5d4 100%);
   color: var(--foreground);
   font-family: var(--font-space), sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page-shell {
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+.content-shell {
+  margin-inline: auto;
+  width: min(100%, 78rem);
+  padding-inline: 1rem;
+}
+
+.glass-panel {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-soft);
+}
+
+.section-card {
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.ink-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, rgba(24, 21, 18, 0.97), rgba(15, 14, 12, 0.98));
+  color: white;
+  box-shadow: var(--shadow);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field-input {
+  width: 100%;
+  border: 1px solid rgba(23, 20, 18, 0.14);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.95rem 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.field-input:focus {
+  border-color: rgba(21, 154, 104, 0.7);
+  box-shadow: 0 0 0 4px rgba(21, 154, 104, 0.08);
+}
+
+.action-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  padding: 0 1.1rem;
+  font-weight: 800;
+  color: white;
+  transition: transform 160ms ease, opacity 160ms ease, background 160ms ease;
+}
+
+.action-primary:hover {
+  transform: translateY(-1px);
+  background: #000;
+}
+
+.action-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  border: 1px solid rgba(23, 20, 18, 0.08);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  padding: 0 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.action-accent:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+.action-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  border: 1px solid rgba(23, 20, 18, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.action-secondary:hover {
+  transform: translateY(-1px);
+  background: white;
+}
+
+@media (min-width: 640px) {
+  .content-shell {
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-shell {
+    padding-inline: 1.75rem;
+  }
 }

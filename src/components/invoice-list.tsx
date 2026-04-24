@@ -4,8 +4,8 @@ import { checkoutPath, demoInvoices } from "@/lib/weavepay";
 
 export function InvoiceList() {
   return (
-    <div className="rounded-lg border border-black/10 bg-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-black/10 p-4 sm:p-5">
+    <div className="section-card overflow-hidden">
+      <div className="flex items-center justify-between border-b border-black/10 px-5 py-4 sm:px-6">
         <div>
           <h2 className="text-xl font-black">Recent invoices</h2>
           <p className="text-sm font-medium text-[var(--muted)]">Onchain payment state for the merchant.</p>
@@ -16,7 +16,7 @@ export function InvoiceList() {
         {demoInvoices.map((invoice) => (
           <Link
             key={invoice.id}
-            className="grid gap-3 p-4 transition hover:bg-[var(--paper)] sm:p-5 md:grid-cols-[0.7fr_1fr_0.7fr_0.6fr] md:items-center"
+            className="grid gap-3 px-5 py-4 transition hover:bg-[var(--paper)] sm:px-6 md:grid-cols-[0.7fr_1fr_0.7fr_0.6fr] md:items-center"
             href={checkoutPath(invoice.id)}
           >
             <div className="flex items-start justify-between gap-3 md:block">
@@ -39,4 +39,3 @@ export function InvoiceList() {
     </div>
   );
 }
-

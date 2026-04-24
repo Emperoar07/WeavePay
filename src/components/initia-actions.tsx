@@ -14,17 +14,19 @@ function HeaderButtonsInner() {
   const { initiaAddress, openBridge, openConnect, openWallet } = useInterwovenKit();
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
+    <div className="grid grid-cols-2 gap-2 lg:flex lg:items-center">
       <button
-        className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-black/15 bg-white px-3 text-sm font-bold shadow-sm transition hover:bg-black hover:text-white sm:h-10"
+        className="action-secondary h-11 rounded-full px-4 text-sm sm:h-10"
         onClick={() => openBridge?.({ srcChainId: "initiation-2", srcDenom: "uinit" })}
+        type="button"
       >
         <Link2 size={16} />
         Bridge funds
       </button>
       <button
-        className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-3 text-sm font-black text-[var(--ink)] shadow-sm transition hover:brightness-95 sm:h-10"
+        className="action-accent h-11 rounded-full px-4 text-sm sm:h-10"
         onClick={() => (initiaAddress ? openWallet?.() : openConnect?.())}
+        type="button"
       >
         <Wallet size={16} />
         {initiaAddress ? shortenAddress(initiaAddress) : "Connect wallet"}
@@ -108,7 +110,7 @@ function ContractActionButtonInner({
   }
 
   return (
-    <button className={className} onClick={submitTransaction}>
+    <button className={className} onClick={submitTransaction} type="button">
       <LoaderCircle className="hidden animate-spin group-disabled:block" size={16} />
       {children}
     </button>
@@ -129,7 +131,7 @@ export function CreateInvoiceAction(props: {
     <ContractActionButtonInner
       action="create"
       amount={props.amount}
-      className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-[var(--ink)] px-5 text-sm font-black text-white transition hover:bg-black"
+      className="action-primary w-full"
       merchant={props.merchant}
       metadataURI={props.metadataURI}
       onSuccess={props.onSuccess}
@@ -144,7 +146,7 @@ export function PayInvoiceAction(props: { amount: string; invoiceId: string }) {
     <ContractActionButtonInner
       action="pay"
       amount={props.amount}
-      className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] text-sm font-black text-[var(--ink)]"
+      className="action-accent mt-7 w-full"
       invoiceId={props.invoiceId}
     >
       Connect and pay
