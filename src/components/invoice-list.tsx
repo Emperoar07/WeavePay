@@ -21,7 +21,7 @@ export function InvoiceList() {
               <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-[var(--muted)]">{invoice.time}</div>
             </div>
             <div>{invoice.customer}</div>
-            <div className="serif-display text-[17px] leading-none">{invoice.amountLabel}</div>
+            <div className="serif-display text-[1.75rem] leading-none">{invoice.amountLabel}</div>
             <div>
               <span className={`status-chip ${invoice.status === "Paid" ? "paid" : "pending"}`}>{invoice.status}</span>
             </div>

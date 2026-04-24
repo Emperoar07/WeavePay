@@ -22,15 +22,14 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
       <AppNav />
 
       <section className="content-shell pb-10 pt-7">
-        <div className="grid gap-4 lg:grid-cols-[1fr_1.3fr]">
-          <div className="section-card p-9">
+        <div className="grid gap-4 md:grid-cols-[1fr_1.3fr]">
+          <div className="section-card min-w-0 p-9">
             <div className="kicker">
               <span className="kicker-dot" />
               Buyer checkout
             </div>
-            <h1 className="serif-display mt-7 max-w-[9ch] text-[42px] leading-[1.05]">
-              Orbit Shop
-              <br />· Limited drop
+            <h1 className="serif-display mt-7 text-[clamp(2rem,3.5vw,2.75rem)] leading-[1.05]">
+              Orbit Shop · Limited drop
             </h1>
             <p className="mt-6 max-w-[34ch] text-[15px] text-[var(--ink-soft)]">
               A pre-order for the upcoming streetwear collection from Orbit Shop, settled in GAS on weavepay-1.
@@ -40,12 +39,12 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
               <p className="eyebrow text-[#a29682]">Paying</p>
               <p className="mt-3 text-[18px] font-extrabold">{invoice.merchant}</p>
               <p className="eyebrow mt-8 text-[#a29682]">Amount due</p>
-              <p className="serif-display mt-3 text-[56px] leading-none">{invoice.amount} GAS</p>
+              <p className="serif-display mt-3 text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none">{invoice.amount} GAS</p>
               <DynamicPayInvoiceAction amount={invoice.amount} invoiceId={invoice.id} />
             </div>
           </div>
 
-          <div className="ink-card relative overflow-hidden p-8">
+          <div className="ink-card relative min-w-0 overflow-hidden p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_90%_100%,var(--plum),transparent_60%)] opacity-55" />
             <div className="relative">
               <div className="flex items-start justify-between gap-4">

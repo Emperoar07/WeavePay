@@ -43,18 +43,18 @@ export default function Home() {
       <AppNav />
 
       <section className="content-shell pb-6 pt-7">
-        <div className="grid gap-6 rounded-[24px] border border-[var(--line)] bg-[linear-gradient(180deg,var(--paper-soft)_0%,var(--paper)_100%)] p-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:p-12">
-          <div>
+        <div className="grid gap-8 rounded-[24px] border border-[var(--line)] bg-[linear-gradient(180deg,var(--paper-soft)_0%,var(--paper)_100%)] p-6 md:grid-cols-[1.1fr_0.9fr] md:gap-10 md:p-10 lg:p-12">
+          <div className="min-w-0">
             <div className="kicker">
               <span className="kicker-dot" />
               Testnet live - weavepay-1
             </div>
 
-            <h1 className="serif-display mt-5 max-w-[10ch] text-[3.35rem] leading-[0.95] sm:text-[4.4rem]">
+            <h1 className="serif-display mt-5 max-w-[12ch] text-[clamp(2.5rem,5vw,4.25rem)] leading-[1.02]">
               Checkout links that <span className="italic text-[var(--rust)]">settle</span> on your own chain.
             </h1>
 
-            <p className="mt-5 max-w-[48ch] text-base text-[var(--ink-soft)] sm:text-[17px]">
+            <p className="mt-5 max-w-[48ch] text-[15px] text-[var(--ink-soft)] sm:text-[16px]">
               WeavePay gives merchants a compact payment stack — create an invoice, share a buyer link, and settle value directly on an Initia EVM rollup with wallet-native UX.
             </p>
 
@@ -84,7 +84,7 @@ export default function Home() {
             </dl>
           </div>
 
-          <div className="ink-card relative overflow-hidden p-8">
+          <div className="ink-card relative min-w-0 overflow-hidden p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_120%_-20%,var(--plum)_0%,transparent_60%)] opacity-60" />
             <div className="relative">
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a29682]">Live invoice feed</p>
@@ -116,7 +116,7 @@ export default function Home() {
           {features.map((feature) => (
             <Link
               key={feature.title}
-              className={`rounded-[18px] border border-[var(--line)] p-7 transition hover:-translate-y-0.5 ${
+              className={`flex h-full flex-col rounded-[18px] border border-[var(--line)] p-7 transition hover:-translate-y-0.5 ${
                 feature.dark ? "bg-[var(--ink)] text-[var(--paper-soft)]" : "bg-[var(--paper-soft)]"
               }`}
               href={feature.href}
@@ -125,8 +125,8 @@ export default function Home() {
                 {feature.number}
               </div>
               <h3 className="serif-display mt-3 text-[22px]">{feature.title}</h3>
-              <p className={`mt-3 text-sm ${feature.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{feature.body}</p>
-              <span className={`mt-5 inline-flex border-b-[1.5px] pb-0.5 text-sm font-bold ${feature.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)]"}`}>
+              <p className={`mt-3 flex-1 text-sm ${feature.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{feature.body}</p>
+              <span className={`mt-5 inline-flex w-max border-b-[1.5px] pb-0.5 text-sm font-bold ${feature.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)]"}`}>
                 {feature.title === "Create" ? "Start creating →" : feature.title === "Checkout" ? "Preview checkout →" : "Open settings →"}
               </span>
             </Link>

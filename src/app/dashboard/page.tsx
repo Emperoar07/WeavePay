@@ -10,7 +10,7 @@ export default function DashboardPage() {
       <AppNav />
 
       <section className="content-shell pb-10 pt-7">
-        <div className="flex flex-col gap-5 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-6 py-8 lg:flex-row lg:items-end lg:justify-between lg:px-9">
+        <div className="flex flex-col gap-5 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-6 py-8 md:flex-row md:items-end md:justify-between md:px-9">
           <div>
             <div className="kicker">
               <span className="kicker-dot" />
@@ -35,10 +35,12 @@ export default function DashboardPage() {
           <MetricCard value="32" label="Invoices" className="border-[var(--ink)] bg-[var(--ink)] text-[var(--paper-soft)] [&_p:last-child]:text-[#a29682]" />
         </div>
 
-        <div className="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-          <InvoiceList />
+        <div className="mt-4 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
+          <div className="min-w-0">
+            <InvoiceList />
+          </div>
 
-          <div className="section-card overflow-hidden">
+          <div className="section-card min-w-0 overflow-hidden">
             <div className="border-b border-[var(--line)] px-6 py-5">
               <h2 className="serif-display text-[22px]">Live config</h2>
               <p className="mt-1 text-xs text-[var(--muted)]">These values point the UI at testnet.</p>

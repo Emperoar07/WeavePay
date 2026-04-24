@@ -70,8 +70,8 @@ export default function NewInvoicePage() {
       <AppNav />
 
       <section className="content-shell pb-10 pt-7">
-        <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
-          <div className="section-card p-9">
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="section-card min-w-0 p-9">
             <div className="kicker">
               <span className="kicker-dot" />
               Merchant action
@@ -102,7 +102,7 @@ export default function NewInvoicePage() {
             </div>
           </div>
 
-          <div className="ink-card relative overflow-hidden p-9">
+          <div className="ink-card relative min-w-0 overflow-hidden p-9">
             <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-60 w-60 bg-[radial-gradient(circle,var(--rust),transparent_70%)] opacity-40" />
             <div className="relative">
               <div className="flex items-start justify-between gap-4">
@@ -115,7 +115,7 @@ export default function NewInvoicePage() {
 
               <div className="mt-8 rounded-[16px] bg-[var(--paper-soft)] p-7 text-[var(--ink)]">
                 <p className="eyebrow">Amount due</p>
-                <p className="serif-display mt-2 text-[64px] leading-none">{amount || "0"} GAS</p>
+                <p className="serif-display mt-2 text-[clamp(2.5rem,5vw,4rem)] leading-none">{amount || "0"} GAS</p>
                 <p className="mt-4 text-[14px] text-[var(--ink-soft)]">{description}</p>
                 <div className="mt-6 flex items-center justify-between gap-3 rounded-[12px] border border-dashed border-[var(--line-strong)] bg-[var(--paper)] px-4 py-4 text-[13px] font-bold">
                   <span className="min-w-0 flex-1 break-all">{checkoutUrl}</span>
