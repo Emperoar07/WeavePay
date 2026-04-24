@@ -3,7 +3,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { AppNav } from "@/components/app-nav";
-import { MetricCard } from "@/components/metric-card";
 
 const features = [
   {
@@ -28,17 +27,17 @@ const features = [
 ];
 
 const liveFeed = [
-  { label: "WP 1042 · Nexa Labs", value: "$420", pending: false },
-  { label: "WP 1041 · Orbit Shop", value: "Pending", pending: true },
-  { label: "WP 1040 · Design DAO", value: "$860", pending: false },
-  { label: "WP 1039 · Lagos Market", value: "$215", pending: false },
+  { label: "WP 1042 - Nexa Labs", value: "$420", pending: false },
+  { label: "WP 1041 - Orbit Shop", value: "Pending", pending: true },
+  { label: "WP 1040 - Design DAO", value: "$860", pending: false },
+  { label: "WP 1039 - Lagos Market", value: "$215", pending: false },
 ];
 
 export default function Home() {
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Design 01 · Editorial Cream</div>
+        <div className="page-label">Design 01 - Editorial Cream</div>
       </div>
 
       <AppNav />
@@ -48,7 +47,7 @@ export default function Home() {
           <div>
             <div className="kicker">
               <span className="kicker-dot" />
-              Testnet live · weavepay-1
+              Testnet live - weavepay-1
             </div>
 
             <h1 className="serif-display mt-5 max-w-[10ch] text-[3.35rem] leading-[0.95] sm:text-[4.4rem]">
@@ -128,8 +127,7 @@ export default function Home() {
               <h3 className="serif-display mt-3 text-[22px]">{feature.title}</h3>
               <p className={`mt-3 text-sm ${feature.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{feature.body}</p>
               <span className={`mt-5 inline-flex border-b-[1.5px] pb-0.5 text-sm font-bold ${feature.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)]"}`}>
-                {feature.title === "Create" ? "Start creating" : feature.title === "Checkout" ? "Preview checkout" : "Open settings"}{" "}
-                →
+                {feature.title === "Create" ? "Start creating" : feature.title === "Checkout" ? "Preview checkout" : "Open settings"} -&gt;
               </span>
             </Link>
           ))}

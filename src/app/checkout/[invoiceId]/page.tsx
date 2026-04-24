@@ -3,8 +3,8 @@ import { DynamicPayInvoiceAction } from "@/components/initia-dynamic";
 import { demoInvoices } from "@/lib/weavepay";
 
 const receiptSteps = [
-  ["Invoice created", "Merchant · 11m ago"],
-  ["Wallet connected", "Buyer · now"],
+  ["Invoice created", "Merchant - 11m ago"],
+  ["Wallet connected", "Buyer - now"],
   ["Payment signed", "Pending"],
   ["Merchant settled", "Waiting"],
 ];
@@ -16,7 +16,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Checkout · /checkout/{invoice.id}</div>
+        <div className="page-label">{`Checkout - /checkout/${invoice.id}`}</div>
       </div>
 
       <AppNav />
@@ -29,7 +29,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
               Buyer checkout
             </div>
             <h1 className="serif-display mt-7 max-w-[9ch] text-[42px] leading-[1.05]">
-              Orbit Shop · Limited drop
+              Orbit Shop - Limited drop
             </h1>
             <p className="mt-6 max-w-[34ch] text-[15px] text-[var(--ink-soft)]">
               A pre-order for the upcoming streetwear collection from Orbit Shop, settled in GAS on weavepay-1.

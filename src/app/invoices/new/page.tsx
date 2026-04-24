@@ -64,7 +64,7 @@ export default function NewInvoicePage() {
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Create invoice · /invoices/new</div>
+        <div className="page-label">Create invoice - /invoices/new</div>
       </div>
 
       <AppNav />
