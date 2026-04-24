@@ -15,7 +15,7 @@ export default function SettingsPage() {
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Settings - /settings</div>
+        <div className="page-label">Settings · /settings</div>
       </div>
 
       <AppNav />

@@ -62,22 +62,23 @@ export function LiveChainStats() {
 
   if (stats.error) {
     return (
-      <p className="bg-[var(--paper)] px-4 py-4 text-xs font-bold text-[var(--muted)]">
-        Live chain: {stats.error}
-      </p>
+      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
+        <span className="eyebrow">Live chain</span>
+        <span className="text-right font-bold text-[var(--muted)]">{stats.error}</span>
+      </div>
     );
   }
 
   return (
-    <div className="divide-y divide-[var(--line)] text-sm font-bold">
-      <p className="flex items-start justify-between gap-4 px-0 py-4">
+    <>
+      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
         <span className="eyebrow">Invoices on-chain</span>
-        <span>{stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}</span>
-      </p>
-      <p className="flex items-start justify-between gap-4 px-0 py-4">
+        <span className="font-bold">{stats.invoiceCount === null ? "..." : stats.invoiceCount.toString()}</span>
+      </div>
+      <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4 text-[13px]">
         <span className="eyebrow">Fee</span>
-        <span>{stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}</span>
-      </p>
-    </div>
+        <span className="font-bold">{stats.protocolFeeBps === null ? "..." : `${Number(stats.protocolFeeBps) / 100}%`}</span>
+      </div>
+    </>
   );
 }

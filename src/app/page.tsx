@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Design 01 - Editorial Cream</div>
+        <div className="page-label">Design 01 · Editorial Cream</div>
       </div>
 
       <AppNav />
@@ -55,7 +55,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-5 max-w-[48ch] text-base text-[var(--ink-soft)] sm:text-[17px]">
-              WeavePay gives merchants a compact payment stack: create an invoice, share a buyer link, and settle value directly on an Initia EVM rollup with wallet-native UX.
+              WeavePay gives merchants a compact payment stack — create an invoice, share a buyer link, and settle value directly on an Initia EVM rollup with wallet-native UX.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -127,7 +127,7 @@ export default function Home() {
               <h3 className="serif-display mt-3 text-[22px]">{feature.title}</h3>
               <p className={`mt-3 text-sm ${feature.dark ? "text-[#a29682]" : "text-[var(--ink-soft)]"}`}>{feature.body}</p>
               <span className={`mt-5 inline-flex border-b-[1.5px] pb-0.5 text-sm font-bold ${feature.dark ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--ink)]"}`}>
-                {feature.title === "Create" ? "Start creating" : feature.title === "Checkout" ? "Preview checkout" : "Open settings"} -&gt;
+                {feature.title === "Create" ? "Start creating →" : feature.title === "Checkout" ? "Preview checkout →" : "Open settings →"}
               </span>
             </Link>
           ))}

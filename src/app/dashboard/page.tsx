@@ -43,22 +43,20 @@ export default function DashboardPage() {
               <h2 className="serif-display text-[22px]">Live config</h2>
               <p className="mt-1 text-xs text-[var(--muted)]">These values point the UI at testnet.</p>
             </div>
-            <div className="divide-y divide-[var(--line)] text-[13px]">
+            <div className="text-[13px]">
               <div className="flex items-start justify-between gap-4 px-6 py-4">
                 <span className="eyebrow">Chain ID</span>
                 <span className="font-bold">{appConfig.chainId}</span>
               </div>
-              <div className="flex items-start justify-between gap-4 px-6 py-4">
+              <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4">
                 <span className="eyebrow">Denom</span>
                 <span className="font-bold">{appConfig.denom}</span>
               </div>
-              <div className="flex items-start justify-between gap-4 px-6 py-4">
+              <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4">
                 <span className="eyebrow">Contract</span>
                 <span className="max-w-[17rem] break-all text-right font-bold">{appConfig.contractAddress || "Not deployed yet"}</span>
               </div>
-              <div className="px-6 py-4">
-                <LiveChainStats />
-              </div>
+              <LiveChainStats />
             </div>
           </div>
         </div>
