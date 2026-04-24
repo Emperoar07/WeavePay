@@ -4,9 +4,9 @@
   "vm": "EVM",
   "network": "Initia testnet",
   "rollup_chain_id": "weavepay-1",
-  "contract_address": "TBD",
+  "contract_address": "0x112E32c4aC5b56229239F4CdB9B12b8e1B5743BB",
   "demo_video_url": "TBD",
-  "repository_url": "TBD",
+  "repository_url": "https://github.com/Emperoar07/WeavePay",
   "native_features": [
     "InterwovenKit wallet connection",
     "Interwoven bridge entry point",
