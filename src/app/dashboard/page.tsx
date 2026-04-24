@@ -7,10 +7,15 @@ import { appConfig } from "@/lib/weavepay";
 export default function DashboardPage() {
   return (
     <main className="page-shell">
+      <div className="content-shell pt-8">
+        <div className="page-label">Dashboard · /dashboard</div>
+      </div>
+
       <AppNav />
 
-      <section className="content-shell pb-10 pt-7">
-        <div className="flex flex-col gap-5 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-6 py-8 md:flex-row md:items-end md:justify-between md:px-9">
+      <section className="content-shell pt-7 pb-10">
+        {/* Top banner */}
+        <div className="flex items-end justify-between gap-6 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-9 py-8">
           <div>
             <div className="kicker">
               <span className="kicker-dot" />
@@ -23,24 +28,21 @@ export default function DashboardPage() {
               Track invoices, inspect payment state, and show that WeavePay is pointing at a real Initia testnet rollup.
             </p>
           </div>
-
-          <a className="action-accent" href="/invoices/new">
-            + New invoice
-          </a>
+          <a className="action-accent shrink-0" href="/invoices/new">+ New invoice</a>
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        {/* Metric cards */}
+        <div className="mt-4 grid grid-cols-3 gap-4">
           <MetricCard value="$12.4k" label="Processed" />
           <MetricCard value="$124" label="Fees earned" className="border-[var(--ink)] bg-[var(--accent)]" />
           <MetricCard value="32" label="Invoices" className="border-[var(--ink)] bg-[var(--ink)] text-[var(--paper-soft)] [&_p:last-child]:text-[#a29682]" />
         </div>
 
-        <div className="mt-4 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="min-w-0">
-            <InvoiceList />
-          </div>
+        {/* Main grid */}
+        <div className="mt-4 grid grid-cols-[1.2fr_0.8fr] gap-4">
+          <InvoiceList />
 
-          <div className="section-card min-w-0 overflow-hidden">
+          <div className="section-card overflow-hidden">
             <div className="border-b border-[var(--line)] px-6 py-5">
               <h2 className="serif-display text-[22px]">Live config</h2>
               <p className="mt-1 text-xs text-[var(--muted)]">These values point the UI at testnet.</p>
@@ -56,7 +58,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex items-start justify-between gap-4 border-t border-[var(--line)] px-6 py-4">
                 <span className="eyebrow">Contract</span>
-                <span className="max-w-[17rem] break-all text-right font-bold">{appConfig.contractAddress || "Not deployed yet"}</span>
+                <span className="break-all text-right font-bold">{appConfig.contractAddress || "Not deployed yet"}</span>
               </div>
               <LiveChainStats />
             </div>

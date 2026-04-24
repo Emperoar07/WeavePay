@@ -3,8 +3,8 @@ import { DynamicPayInvoiceAction } from "@/components/initia-dynamic";
 import { demoInvoices } from "@/lib/weavepay";
 
 const receiptSteps = [
-  ["Invoice created", "Merchant - 11m ago"],
-  ["Wallet connected", "Buyer - now"],
+  ["Invoice created", "Merchant · 11m ago"],
+  ["Wallet connected", "Buyer · now"],
   ["Payment signed", "Pending"],
   ["Merchant settled", "Waiting"],
 ];
@@ -21,31 +21,32 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
 
       <AppNav />
 
-      <section className="content-shell pb-10 pt-7">
-        <div className="grid gap-4 md:grid-cols-[1fr_1.3fr]">
-          <div className="section-card min-w-0 p-9">
+      <section className="content-shell pt-7 pb-10">
+        <div className="grid grid-cols-[1fr_1.3fr] gap-4">
+          {/* Pay card */}
+          <div className="section-card p-9">
             <div className="kicker">
               <span className="kicker-dot" />
               Buyer checkout
             </div>
-            <h1 className="serif-display mt-7 text-[clamp(2rem,3.5vw,2.75rem)] leading-[1.05]">
-              Orbit Shop · Limited drop
+            <h1 className="serif-display mt-7 text-[42px] leading-[1.05]">
+              Orbit Shop<br />· Limited drop
             </h1>
             <p className="mt-6 max-w-[34ch] text-[15px] text-[var(--ink-soft)]">
               A pre-order for the upcoming streetwear collection from Orbit Shop, settled in GAS on weavepay-1.
             </p>
-
             <div className="mt-8 rounded-[16px] bg-[var(--ink)] p-6 text-[var(--paper-soft)]">
               <p className="eyebrow text-[#a29682]">Paying</p>
               <p className="mt-3 text-[18px] font-extrabold">{invoice.merchant}</p>
               <p className="eyebrow mt-8 text-[#a29682]">Amount due</p>
-              <p className="serif-display mt-3 text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none">{invoice.amount} GAS</p>
+              <p className="serif-display mt-3 text-[56px] leading-none">{invoice.amount} GAS</p>
               <DynamicPayInvoiceAction amount={invoice.amount} invoiceId={invoice.id} />
             </div>
           </div>
 
-          <div className="ink-card relative min-w-0 overflow-hidden p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_90%_100%,var(--plum),transparent_60%)] opacity-55" />
+          {/* Timeline */}
+          <div className="ink-card relative overflow-hidden p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_90%_100%,var(--plum),transparent_60%)] opacity-[0.55]" />
             <div className="relative">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -55,20 +56,19 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
                   </h2>
                   <p className="mt-3 text-[14px] text-[#a29682]">Every step is on-chain and inspectable.</p>
                 </div>
-                <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.15)] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
+                <span className="rounded-full border border-[rgba(200,242,79,0.3)] bg-[rgba(200,242,79,0.15)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--accent)]">
                   Pending
                 </span>
               </div>
-
-              <div className="mt-8 grid gap-4">
+              <div className="mt-8 grid gap-3">
                 {receiptSteps.map(([title, meta], index) => (
                   <div key={title} className="grid grid-cols-[44px_1fr] items-center gap-4 rounded-[14px] border border-white/10 bg-white/5 p-4">
-                    <div className="serif-display flex h-11 w-11 items-center justify-center rounded-[12px] bg-[var(--accent)] text-[28px] text-[var(--ink)]">
+                    <div className="serif-display flex h-11 w-11 items-center justify-center rounded-[12px] bg-[var(--accent)] text-[18px] text-[var(--ink)]">
                       {index + 1}
                     </div>
                     <div>
                       <p className="text-sm font-bold">{title}</p>
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.1em] text-[#a29682]">{meta}</p>
+                      <p className="mt-0.5 text-[11px] uppercase tracking-[0.1em] text-[#a29682]">{meta}</p>
                     </div>
                   </div>
                 ))}

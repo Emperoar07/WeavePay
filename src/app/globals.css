@@ -231,7 +231,13 @@ button {
 
 @media (min-width: 640px) {
   .content-shell {
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .content-shell {
+    padding-inline: 2rem;
   }
 }
 

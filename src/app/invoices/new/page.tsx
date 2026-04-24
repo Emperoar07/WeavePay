@@ -42,7 +42,6 @@ export default function NewInvoicePage() {
   const handleSuccess = useCallback(async () => {
     const addr = appConfig.contractAddress;
     if (!addr || !isAddress(addr)) return;
-
     try {
       const client = createPublicClient({ chain: readChain, transport: http(appConfig.jsonRpcUrl) });
       const count = await client.readContract({
@@ -52,7 +51,7 @@ export default function NewInvoicePage() {
       });
       setMintedId(count.toString());
     } catch {
-      // Keep the preview state stable if readback fails.
+      // keep preview stable
     }
   }, []);
 
@@ -64,14 +63,15 @@ export default function NewInvoicePage() {
   return (
     <main className="page-shell">
       <div className="content-shell pt-8">
-        <div className="page-label">Create invoice - /invoices/new</div>
+        <div className="page-label">Create invoice · /invoices/new</div>
       </div>
 
       <AppNav />
 
-      <section className="content-shell pb-10 pt-7">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="section-card min-w-0 p-9">
+      <section className="content-shell pt-7 pb-10">
+        <div className="grid grid-cols-2 gap-4">
+          {/* Form */}
+          <div className="section-card p-9">
             <div className="kicker">
               <span className="kicker-dot" />
               Merchant action
@@ -80,29 +80,29 @@ export default function NewInvoicePage() {
             <p className="mt-3 max-w-[38ch] text-[14px] text-[var(--ink-soft)]">
               Generate a payment request, mint it on the rollup, and immediately share the buyer link.
             </p>
-
             <div className="mt-8 space-y-5">
               <label className="block">
                 <span className="eyebrow">Merchant EVM address</span>
-                <input className="field-input mt-3" value={merchant} onChange={(event) => setMerchant(event.target.value)} />
+                <input className="field-input mt-3" value={merchant} onChange={(e) => setMerchant(e.target.value)} />
               </label>
               <label className="block">
                 <span className="eyebrow">Amount in GAS</span>
-                <input className="field-input mt-3" value={amount} onChange={(event) => setAmount(event.target.value)} />
+                <input className="field-input mt-3" value={amount} onChange={(e) => setAmount(e.target.value)} />
               </label>
               <label className="block">
                 <span className="eyebrow">Description</span>
                 <textarea
-                  className="field-input mt-3 min-h-28 resize-none"
+                  className="field-input mt-3 min-h-[100px] resize-none"
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </label>
               <CreateInvoiceAction amount={amount} merchant={merchant} metadataURI={metadataURI} onSuccess={handleSuccess} />
             </div>
           </div>
 
-          <div className="ink-card relative min-w-0 overflow-hidden p-9">
+          {/* Preview */}
+          <div className="ink-card relative overflow-hidden p-9">
             <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-60 w-60 bg-[radial-gradient(circle,var(--rust),transparent_70%)] opacity-40" />
             <div className="relative">
               <div className="flex items-start justify-between gap-4">
@@ -112,10 +112,9 @@ export default function NewInvoicePage() {
                 </div>
                 <div className="serif-display rounded-full bg-white/10 px-4 py-2 text-[15px]">WP {displayId}</div>
               </div>
-
               <div className="mt-8 rounded-[16px] bg-[var(--paper-soft)] p-7 text-[var(--ink)]">
                 <p className="eyebrow">Amount due</p>
-                <p className="serif-display mt-2 text-[clamp(2.5rem,5vw,4rem)] leading-none">{amount || "0"} GAS</p>
+                <p className="serif-display mt-2 text-[64px] leading-none">{amount || "0"} GAS</p>
                 <p className="mt-4 text-[14px] text-[var(--ink-soft)]">{description}</p>
                 <div className="mt-6 flex items-center justify-between gap-3 rounded-[12px] border border-dashed border-[var(--line-strong)] bg-[var(--paper)] px-4 py-4 text-[13px] font-bold">
                   <span className="min-w-0 flex-1 break-all">{checkoutUrl}</span>
