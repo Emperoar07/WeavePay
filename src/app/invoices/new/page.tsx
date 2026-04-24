@@ -9,10 +9,7 @@ import { appConfig, weavePayAbi } from "@/lib/weavepay";
 
 const CreateInvoiceAction = dynamic(
   () => import("@/components/initia-actions").then((mod) => mod.CreateInvoiceAction),
-  {
-    ssr: false,
-    loading: () => <div className="h-12 w-full rounded-full bg-[var(--ink)]" />,
-  },
+  { ssr: false, loading: () => <div className="h-12 w-full rounded-full bg-[var(--ink)]" /> },
 );
 
 const readChain = defineChain({
@@ -44,15 +41,9 @@ export default function NewInvoicePage() {
     if (!addr || !isAddress(addr)) return;
     try {
       const client = createPublicClient({ chain: readChain, transport: http(appConfig.jsonRpcUrl) });
-      const count = await client.readContract({
-        address: addr as `0x${string}`,
-        abi: weavePayAbi,
-        functionName: "invoiceCount",
-      });
+      const count = await client.readContract({ address: addr as `0x${string}`, abi: weavePayAbi, functionName: "invoiceCount" });
       setMintedId(count.toString());
-    } catch {
-      // keep preview stable
-    }
+    } catch { /* keep preview stable */ }
   }, []);
 
   const copyLink = useCallback(() => {
@@ -62,20 +53,17 @@ export default function NewInvoicePage() {
 
   return (
     <main className="page-shell">
-      <div className="content-shell pt-8">
+      <div className="content-shell pt-12">
         <div className="page-label">Create invoice · /invoices/new</div>
       </div>
 
       <AppNav />
 
-      <section className="content-shell pt-7 pb-10">
+      <section className="content-shell mt-8 pb-16">
         <div className="grid grid-cols-2 gap-4">
           {/* Form */}
           <div className="section-card p-9">
-            <div className="kicker">
-              <span className="kicker-dot" />
-              Merchant action
-            </div>
+            <div className="kicker"><span className="kicker-dot" />Merchant action</div>
             <h1 className="serif-display mt-5 text-[32px]">Create invoice</h1>
             <p className="mt-3 max-w-[38ch] text-[14px] text-[var(--ink-soft)]">
               Generate a payment request, mint it on the rollup, and immediately share the buyer link.
@@ -91,11 +79,7 @@ export default function NewInvoicePage() {
               </label>
               <label className="block">
                 <span className="eyebrow">Description</span>
-                <textarea
-                  className="field-input mt-3 min-h-[100px] resize-none"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
+                <textarea className="field-input mt-3 min-h-[100px] resize-none" value={description} onChange={(e) => setDescription(e.target.value)} />
               </label>
               <CreateInvoiceAction amount={amount} merchant={merchant} metadataURI={metadataURI} onSuccess={handleSuccess} />
             </div>

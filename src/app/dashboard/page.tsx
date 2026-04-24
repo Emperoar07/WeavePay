@@ -7,20 +7,17 @@ import { appConfig } from "@/lib/weavepay";
 export default function DashboardPage() {
   return (
     <main className="page-shell">
-      <div className="content-shell pt-8">
+      <div className="content-shell pt-12">
         <div className="page-label">Dashboard · /dashboard</div>
       </div>
 
       <AppNav />
 
-      <section className="content-shell pt-7 pb-10">
+      <section className="content-shell mt-8 pb-16">
         {/* Top banner */}
         <div className="flex items-end justify-between gap-6 rounded-[20px] border border-[var(--line)] bg-[var(--paper-soft)] px-9 py-8">
           <div>
-            <div className="kicker">
-              <span className="kicker-dot" />
-              Merchant command center
-            </div>
+            <div className="kicker"><span className="kicker-dot" />Merchant command center</div>
             <h1 className="serif-display mt-4 text-[42px] leading-none">
               Settlement revenue, <span className="italic text-[var(--rust)]">live</span>.
             </h1>
@@ -38,10 +35,9 @@ export default function DashboardPage() {
           <MetricCard value="32" label="Invoices" className="border-[var(--ink)] bg-[var(--ink)] text-[var(--paper-soft)] [&_p:last-child]:text-[#a29682]" />
         </div>
 
-        {/* Main grid */}
+        {/* Invoice list + config */}
         <div className="mt-4 grid grid-cols-[1.2fr_0.8fr] gap-4">
           <InvoiceList />
-
           <div className="section-card overflow-hidden">
             <div className="border-b border-[var(--line)] px-6 py-5">
               <h2 className="serif-display text-[22px]">Live config</h2>

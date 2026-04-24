@@ -14,19 +14,16 @@ export default function SettingsPage() {
 
   return (
     <main className="page-shell">
-      <div className="content-shell pt-8">
+      <div className="content-shell pt-12">
         <div className="page-label">Settings · /settings</div>
       </div>
 
       <AppNav />
 
-      <section className="content-shell pt-7 pb-10">
+      <section className="content-shell mt-8 pb-16">
         <div className="mx-auto max-w-[860px]">
           <div className="section-card p-9">
-            <div className="kicker">
-              <span className="kicker-dot" />
-              Judge verification
-            </div>
+            <div className="kicker"><span className="kicker-dot" />Judge verification</div>
             <h1 className="serif-display mt-5 text-[36px]">Testnet settings</h1>
             <p className="mt-4 max-w-[50ch] text-[14px] text-[var(--ink-soft)]">
               These are the exact environment values the frontend uses to speak to the WeavePay rollup and contract.
@@ -35,9 +32,7 @@ export default function SettingsPage() {
               {rows.map(([label, value], index) => (
                 <div
                   key={label}
-                  className={`grid grid-cols-[180px_1fr] gap-3 px-5 py-4 text-[13px] ${
-                    index < rows.length - 1 ? "border-b border-[var(--line)]" : ""
-                  }`}
+                  className={`grid grid-cols-[180px_1fr] gap-3 px-5 py-4 text-[13px] ${index < rows.length - 1 ? "border-b border-[var(--line)]" : ""}`}
                 >
                   <div className="eyebrow">{label}</div>
                   <div className="break-all font-bold">{value}</div>

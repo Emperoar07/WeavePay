@@ -15,20 +15,17 @@ export default async function CheckoutPage({ params }: { params: Promise<{ invoi
 
   return (
     <main className="page-shell">
-      <div className="content-shell pt-8">
+      <div className="content-shell pt-12">
         <div className="page-label">{`Checkout · /checkout/${invoice.id}`}</div>
       </div>
 
       <AppNav />
 
-      <section className="content-shell pt-7 pb-10">
+      <section className="content-shell mt-8 pb-16">
         <div className="grid grid-cols-[1fr_1.3fr] gap-4">
           {/* Pay card */}
           <div className="section-card p-9">
-            <div className="kicker">
-              <span className="kicker-dot" />
-              Buyer checkout
-            </div>
+            <div className="kicker"><span className="kicker-dot" />Buyer checkout</div>
             <h1 className="serif-display mt-7 text-[42px] leading-[1.05]">
               Orbit Shop<br />· Limited drop
             </h1>

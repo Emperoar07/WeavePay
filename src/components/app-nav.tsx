@@ -16,7 +16,7 @@ export function AppNav() {
   const pathname = usePathname();
 
   return (
-    <header className="content-shell pt-4 sm:pt-5">
+    <header className="content-shell pt-5">
       <div className="glass-panel flex items-center justify-between gap-4 rounded-[18px] px-6 py-4">
         <Link className="flex items-center gap-3" href="/">
           <div className="flex h-10 w-[4.4rem] shrink-0 items-center justify-center">
